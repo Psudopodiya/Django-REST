@@ -23,5 +23,13 @@ pipeline {
                 sh "${PYTHON_EXECUTABLE} manage.py test"
             }
         }
+        stage('Start Server') {
+            steps {
+                // Start the Django development server.
+                sh "${PYTHON_EXECUTABLE} manage.py runserver 0.0.0.0:8000 &"
+                // Sleep for a few seconds to allow the server to start before proceeding to the next steps.
+                sh 'sleep 10'
+            }
+        }
     }
 }
