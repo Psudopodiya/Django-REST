@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-                sh 'python manage.py test'
+                sh "${PYTHON_EXECUTABLE} manage.py test"
             }
         }
     }
