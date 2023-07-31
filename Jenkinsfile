@@ -1,5 +1,11 @@
 pipeline {
     agent any
+
+    environment {
+        // Define the Python executable path explicitly to ensure the correct version is used.
+        PYTHON_EXECUTABLE = "python3" // Replace "python3" with the appropriate Python executable name.
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -8,7 +14,8 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                // Use the defined Python executable to install dependencies.
+                sh "${PYTHON_EXECUTABLE} -m pip install -r requirements.txt"
             }
         }
         stage('Run Tests') {
